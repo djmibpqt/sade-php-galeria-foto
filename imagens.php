@@ -10,7 +10,7 @@ if($fotosAlbum==""){
 	// Álbum padrão se o mesmo não for passado
 	$fotosAlbum="galeriateste";
 }
-$dirImgs = "$fotosAlbum/";
+$dirImgs = "img/$fotosAlbum/";
 
 //Ler os arquivos no diretório e organiza em órdem natural
 $arquivos = scandir($dirImgs);
@@ -85,8 +85,8 @@ if($fotoInterlace==""||$fotoInterlace!=0){
 // primeiro indice do array define a altura da imagem, a qual a logo original seguiu para ter seu tamanho definido.
 
 $fotosTamanhos = array(1200
-				,100,60
-				,600,450
+				,150,100
+				,900,600
 				,720,480
 				,760,450
 				,800,600
