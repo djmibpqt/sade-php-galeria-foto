@@ -12,25 +12,31 @@ if($fotosAlbum==""){
 }
 $dirImgs = "img/$fotosAlbum/";
 
+// forma antiga de ler arquivos
+
 //Ler os arquivos no diretório e organiza em órdem natural
-$arquivos = scandir($dirImgs);
-array_splice($arquivos,0,2);
-natcasesort($arquivos);
+// $arquivos = scandir($dirImgs);
+// array_splice($arquivos,0,2);
+// natcasesort($arquivos);
+
+// // loop para pegar arquivos jpg ou jpeg
+// // e seus respectivos tamanhos
+
+// foreach($arquivos as $arquivo){
+// 	if(preg_match("/^.+\.jpe?g$/",$arquivo)){
+// 		$imagens[]=$arquivo;
+// 		list($imagemLargura,$imagemAltura)=getimagesize($dirImgs.$arquivo);
+// 		$imagemTamanhos[]="$imagemLargura,$imagemAltura";
+// 	}
+// }
+
+//Nova forma de ler os arquivos
+
+$arquivos = glob("$dirImgs*.jp*g", GLOB_NOSORT);
 
 // inicializa arrays
-$imagens = [];
+$imagens = $arquivos;
 $imagemTamanhos = [];
-
-// loop para pegar arquivos jpg ou jpeg
-// e seus respectivos tamanhos
-
-foreach($arquivos as $arquivo){
-	if(preg_match("/^.+\.jpe?g$/",$arquivo)){
-		$imagens[]=$arquivo;
-		list($imagemLargura,$imagemAltura)=getimagesize($dirImgs.$arquivo);
-		$imagemTamanhos[]="$imagemLargura,$imagemAltura";
-	}
-}
 
 // total de fotos
 $fotoTotal = count($imagens);
@@ -132,8 +138,10 @@ if($foto<0||$foto>$fotoTotal){
 
 // pegando a imagem requerida junto ao tamanho
 
-$imagemOriginal = $dirImgs.$imagens[$foto];
-$imagemOriginalTamanhos = explode(",",$imagemTamanhos[$foto]);
+$imagemOriginal = $imagens[$foto];
+list($imagemLargura,$imagemAltura)=getimagesize($imagemOriginal);
+$imagemTamanhos[]="$imagemLargura,$imagemAltura";
+$imagemOriginalTamanhos = explode(",",$imagemTamanhos[0]);
 
 // logo padrao para a foto
 $logoPadrao = 0;
