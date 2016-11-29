@@ -2,7 +2,7 @@
 
 class Foto{
 
-	public function __construct($fotoTotal, $fotoAlturaPequena, $mostragemPorSecao, $mostragemPorLinha, $fotoSigla, $fotoSecao, $tamanhos, $containerID){
+	public function __construct($fotoTotal, $fotoAlturaPequena, $mostragemPorSecao, $mostragemPorLinha, $fotoSigla, $fotoSecao, $tamanhos, $containerID, $layout = "layout.php"){
 
 		global $strPaginaDir;
 
@@ -19,19 +19,15 @@ class Foto{
 		$this->fotoAmplia = $this->secaoNome."Amplia";
 		$this->fotoMonta = $this->secaoNome."Secao";
 		$this->verTodas = $this->secaoNome."Todas";
-		$this->layout = "mibMiniaturasIni		mibMiniaturasSecIni		<span class=\"texto1\"> P&aacute;gina: <\/span>		miniaturasSec".$this->coringa."		mibMiniaturasSecSIni		<span class=\"texto1\" style=\"padding-top:2px;\">mibTxtSecaoNumSelecionadaS<\/span>	 mibMiniaturasSecSFim		mibMiniaturasSecNIni 	<a href=\"".$strPaginaDir."?p=mibTxtSecaoNumSelecionadaN/\" class=\"link2\">mibTxtSecaoNumSelecionadaN<\/a>		mibMiniaturasSecNFim	<p><span class=\"texto3\">Clique nas fotos para ampliar!<\/span><\/p>		 mibMiniaturasSecFim	<table cellspacing=\"0\" class=\"fotosTabela\">		miniaturas".$this->coringa."		mibMiniaturasFotoLinIniIni		<tr>		mibMiniaturasFotoLinIniFim		mibMiniaturasFotoIni	 <td class=\"fotosPreP\"><a href=\"".$strPaginaDir."?a=foto&n=mibMinFotoNum/\" title=\"Clique para Ampliar\" name=\"".$this->sigla."mibMinFotoNum\" id=\"".$this->sigla."mibMinFotoNum\"><img width=\"mibMinFotoLarguraPequena\" height=\"mibMinFotoAlturaPequena\" src=\"mibMinFotoDirP\" name=\"f".$this->sigla."mibMinFotoNum\" id=\"f".$this->sigla."mibMinFotoNum\" border=\"0\" alt=\"Clique para Ampliar\"><\/a><\/td>		mibMiniaturasFotoFim		mibMiniaturasFotoLinFimIni		<\/tr>			mibMiniaturasFotoLinFimFim		<\/table>		mibMiniaturasFim					mibAmpliadasIni		<table width=\"100%\" cellspacing=\"0\" class=\"fotosTabela\">	<tr>	<td width=\"33%\" style=\"text-align:center;\">		mibAmpliadasAntIni		<a href=\"".$strPaginaDir."?a=foto&n=mibAmpFotoControleAntNum/\" class=\"fa\">Ver Anterior<\/a>		mibAmpliadasAntFim		<\/td>	<td width=\"34%\" style=\"text-align:center;\"><a href=\"".$strPaginaDir."?p=mibSecaoNum\" class=\"ft\">Ver Todas<\/a><\/td>		<td width=\"33%\" style=\"text-align:center;\">		mibAmpliadasProIni		<a href=\"".$strPaginaDir."?a=foto&n=mibAmpFotoControleProNum/\" class=\"fp\">Ver Pr&oacute;xima<\/a>		mibAmpliadasProFim		<\/td>	<\/tr>	<tr>	<td colspan=\"3\" style=\"text-align:center;\">[Foto N&ordm; mibAmpFotoNum]<br><\/td>	<\/tr>	<tr>	<td colspan=\"3\" class=\"fotosPreG\" style=\"text-align:center;\"><input type=\"text\" disabled=\"disabled\" style=\"border:none; margin:auto; width:mibAmpFotoLagpx; height:mibAmpFotoAlgpx; background:url(mibAmpFotoDirG) no-repeat center;\" title=\"mibAmpFotoTitulo\"><\/td>	<\/tr>	<\/table>		mibAmpliadasFim";
+		$this->layout = str_replace("Sigla", $this->sigla, str_replace("Coringa", $this->coringa, fread(fopen($layout, "r"), filesize($layout))));
 	}
 
 	public static function prepara($albumDiretorio){
-		$arquivos = scandir($albumDiretorio);
-		array_splice($arquivos,0,2);
-		natcasesort($arquivos);
+		$arquivos =  glob("$albumDiretorio*.jp*g", GLOB_NOSORT);
 
 		foreach($arquivos as $nome){
-			if(preg_match("/^.+\.jpe?g$/i",$nome)){
-				list($largura,$altura)=getimagesize($albumDiretorio.$nome);
-				$tamanhos[]="$largura,$altura";
-			}
+			list($largura,$altura)=getimagesize($nome);
+			$tamanhos[]="$largura,$altura";
 		}
 		$fotoTotal = count($tamanhos);
 
