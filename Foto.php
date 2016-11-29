@@ -19,7 +19,7 @@ class Foto{
 		$this->fotoAmplia = $this->secaoNome."Amplia";
 		$this->fotoMonta = $this->secaoNome."Secao";
 		$this->verTodas = $this->secaoNome."Todas";
-		$this->layout = str_replace("Sigla", $this->sigla, str_replace("Coringa", $this->coringa, fread(fopen($layout, "r"), filesize($layout))));
+		$this->layout = str_replace("Sigla", $this->sigla, str_replace("coringa", $this->coringa, fread(fopen($layout, "r"), filesize($layout))));
 	}
 
 	public static function prepara($albumDiretorio){
@@ -174,44 +174,44 @@ class Foto{
 
 	public function mini($intIni, $intFim){
 		$intNum = $intIni;
-		$fotosMiniaturas = strPegaValor("mibMiniaturasIni","mibMiniaturasFim",$this->layout);
+		$fotosMiniaturas = strPegaValor("<miniaturas>","</miniaturas>",$this->layout);
 
-		$layout = "<div id=\"".$this->container."\">\n" . strPegaValor("mibMiniaturasSecIni", "miniaturasSec".$this->coringa, $fotosMiniaturas);
+		$layout = "<div id=\"".$this->container."\">\n" . strPegaValor("<miniaturas-secao>", "<miniaturas-secao-".$this->coringa.">", $fotosMiniaturas);
 
 		for($i=1; $i<=$this->secaoTotal;$i++){
 			if($i==$this->secaoNumero){
-				$layout .= "\n".str_replace("mibTxtSecaoNumSelecionadaS", numCasas($i, $this->numCasas), strPegaValor("mibMiniaturasSecSIni", "mibMiniaturasSecSFim", $fotosMiniaturas));
+				$layout .= "\n".str_replace("<!-- texto-secao-numero-selecionada -->", numCasas($i, $this->numCasas), strPegaValor("<miniaturas-secao-selecionada>", "</miniaturas-secao-selecionada>", $fotosMiniaturas));
 			}else{
-				$layout .= "\n".str_replace("mibTxtSecaoNumSelecionadaN", numCasas($i, $this->numCasas), strPegaValor("mibMiniaturasSecNIni", "mibMiniaturasSecNFim", $fotosMiniaturas));
+				$layout .= "\n".str_replace("<!-- texto-secao-numero-nao-selecionada -->", numCasas($i, $this->numCasas), strPegaValor("<miniaturas-secao-nao-selecionada>", "</miniaturas-secao-nao-selecionada>", $fotosMiniaturas));
 			}
 		}
 
-		$layout .= "\n".strPegaValor("mibMiniaturasSecNFim", "mibMiniaturasSecFim", $fotosMiniaturas);
-		$layout .= "\n".strPegaValor("mibMiniaturasSecFim", "miniaturas".$this->coringa, $fotosMiniaturas)."\n";
+		$layout .= "\n".strPegaValor("</miniaturas-secao-nao-selecionada>", "</miniaturas-secao>", $fotosMiniaturas);
+		$layout .= "\n".strPegaValor("</miniaturas-secao>", "<miniaturas-".$this->coringa.">", $fotosMiniaturas)."\n";
 
 		while($intNum<=$intFim){
 			if($intNum%$this->linha==1){
-				$layout .= strPegaValor("mibMiniaturasFotoLinIniIni", "mibMiniaturasFotoLinIniFim", $fotosMiniaturas)."\n";
+				$layout .= strPegaValor("<miniaturas-foto-linha-inicio>", "</miniaturas-foto-linha-inicio>", $fotosMiniaturas)."\n";
 			}
-			$layout .= strPegaValor("mibMiniaturasFotoIni", "mibMiniaturasFotoFim", $fotosMiniaturas)."\n";
+			$layout .= strPegaValor("<miniaturas-foto>", "</miniaturas-foto>", $fotosMiniaturas)."\n";
 			$this->fotoConfigura($intNum);
-			$layout = str_replace("mibMinFotoLarguraPequena", self::$larguraPequena, $layout);
-			$layout = str_replace("mibMinFotoAlturaPequena", self::$alturaPequena, $layout);
-			$layout = str_replace("mibMinFotoDirP", $this->diretorioPequenas, $layout);
-			$layout = str_replace("mibMinFotoNum", $intNum, $layout);
+			$layout = str_replace("<!-- miniatura-foto-largura-pequena -->", self::$larguraPequena, $layout);
+			$layout = str_replace("<!-- miniatura-foto-altura-pequena -->", self::$alturaPequena, $layout);
+			$layout = str_replace("<!-- miniatura-foto-diretorio-pequena -->", $this->diretorioPequenas, $layout);
+			$layout = str_replace("<!-- miniatura-foto-numero -->", $intNum, $layout);
 
 			if($intNum%$this->linha==0||$intNum==$intFim){
-				$layout .= strPegaValor("mibMiniaturasFotoLinFimIni", "mibMiniaturasFotoLinFimFim", $fotosMiniaturas)."\n";
+				$layout .= strPegaValor("<miniaturas-foto-linha-final>", "</miniaturas-foto-linha-final>", $fotosMiniaturas)."\n";
 			}
 			$intNum++;
 		}
 		
-		$layout .= strPegaValor("mibMiniaturasFotoLinFimFim", "mibMiniaturasFim", $fotosMiniaturas)."\n</div>";
+		$layout .= strPegaValor("</miniaturas-foto-linha-final>", "</miniaturas>", $fotosMiniaturas)."\n</div>";
 
-		$layout = str_replace("mibMinFotoSecaoNome", $this->secaoNome, $layout);
-		$layout = str_replace("mibMinFotoAmplia", $this->fotoAmplia, $layout);
-		$layout = str_replace("mibTxtSecaoNome", $this->secaoNome, $layout);
-		$layout = str_replace("mibTxtSecaoFotoMonta", $this->fotoMonta, $layout);
+		$layout = str_replace("<!-- miniatura-foto-secao-nome -->", $this->secaoNome, $layout);
+		$layout = str_replace("<!-- miniatura-foto-amplia -->", $this->fotoAmplia, $layout);
+		$layout = str_replace("<!-- texto-secao-nome -->", $this->secaoNome, $layout);
+		$layout = str_replace("<!-- texto-secao-foto-monta -->", $this->fotoMonta, $layout);
 		$layout = str_replace("\\/", "/", $layout);
 		echo $layout;
 	}
@@ -220,31 +220,31 @@ class Foto{
 		$this->num = $intNum;
 		$this->secaoNumero = ((int) (($intNum-1)/$this->mostragem+1));
 
-		$fotosAmpliadas = "mibAmpliadasIni".strPegaValor("mibAmpliadasIni", "mibAmpliadasFim", $this->layout);
+		$fotosAmpliadas = "<ampliadas>".strPegaValor("<ampliadas>", "</ampliadas>", $this->layout);
 
-		$layout = "<div id=\"".$this->container."\">\n" . strPegaValor("mibAmpliadasIni", "mibAmpliadasAntIni", $fotosAmpliadas);
+		$layout = "<div id=\"".$this->container."\">\n" . strPegaValor("<ampliadas>", "<ampliadas-anterior>", $fotosAmpliadas);
 		$layout .= ($intNum>1)
-						?strPegaValor("mibAmpliadasAntIni", "mibAmpliadasAntFim", $fotosAmpliadas)
+						?strPegaValor("<ampliadas-anterior>", "</ampliadas-anterior>", $fotosAmpliadas)
 						:" &nbsp; ";
-		$layout .= strPegaValor("mibAmpliadasAntFim", "mibAmpliadasProIni", $fotosAmpliadas);
+		$layout .= strPegaValor("</ampliadas-anterior>", "<ampliadas-proxima>", $fotosAmpliadas);
 		$layout .= ($intNum<$this->total)
-						?strPegaValor("mibAmpliadasProIni", "mibAmpliadasProFim", $fotosAmpliadas)
+						?strPegaValor("<ampliadas-proxima>", "</ampliadas-proxima>", $fotosAmpliadas)
 						:" &nbsp; ";
 		$this->fotoConfigura($intNum);
-		$layout .= strPegaValor("mibAmpliadasProFim", "mibAmpliadasFim", $fotosAmpliadas)."\n</div>";
+		$layout .= strPegaValor("</ampliadas-proxima>", "</ampliadas>", $fotosAmpliadas)."\n</div>";
 
-		$layout = str_replace("mibSecaoNum", numCasas($this->secaoNumero, $this->numCasas), $layout);
-		$layout = str_replace("mibAmpFotoNum", $this->num, $layout);
-		$layout = str_replace("mibAmpFotoSecaoNome", $this->secaoNome, $layout);
-		$layout = str_replace("mibVerTodas", $this->verTodas, $layout);
-		$layout = str_replace("mibAmpFotoAmplia", $this->fotoAmplia, $layout);
-		$layout = str_replace("mibAmpFotoControleAntNum", $intNum-1, $layout);
-		$layout = str_replace("mibAmpFotoControleProNum", $intNum+1, $layout);
-		$layout = str_replace("mibAmpFotoTitulo", $this->titulo, $layout);
-		$layout = str_replace("mibAmpFotoAutor", $this->autor, $layout);
-		$layout = str_replace("mibAmpFotoLag", self::$larguraGrande, $layout);
-		$layout = str_replace("mibAmpFotoAlg", self::$alturaGrande, $layout);
-		$layout = str_replace("mibAmpFotoDirG", $this->diretorioGrandes, $layout);
+		$layout = str_replace("<!-- secao-numero -->", numCasas($this->secaoNumero, $this->numCasas), $layout);
+		$layout = str_replace("<!-- ampliada-foto-numero -->", $this->num, $layout);
+		$layout = str_replace("<!-- ampliada-foto-secao-nome -->", $this->secaoNome, $layout);
+		$layout = str_replace("<!-- ver-todas -->", $this->verTodas, $layout);
+		$layout = str_replace("<!-- ampliada-foto-amplia -->", $this->fotoAmplia, $layout);
+		$layout = str_replace("<!-- ampliada-foto-controle-numero-anterior -->", $intNum-1, $layout);
+		$layout = str_replace("<!-- ampliada-foto-controle-numero-proximo -->", $intNum+1, $layout);
+		$layout = str_replace("<!-- ampliada-foto-titulo -->", $this->titulo, $layout);
+		$layout = str_replace("<!-- ampliada-foto-autor -->", $this->autor, $layout);
+		$layout = str_replace("<!-- ampliada-foto-largura-grande -->", self::$larguraGrande, $layout);
+		$layout = str_replace("<!-- ampliada-foto-altura-grande -->", self::$alturaGrande, $layout);
+		$layout = str_replace("<!-- ampliada-foto-diretorio-grande -->", $this->diretorioGrandes, $layout);
 		$layout = str_replace("\\/", "/", $layout);
 
 		echo $layout;

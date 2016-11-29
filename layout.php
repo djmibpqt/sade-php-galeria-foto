@@ -1,71 +1,71 @@
-mibMiniaturasIni
+<miniaturas>
 
-    mibMiniaturasSecIni
+    <miniaturas-secao>
 
 <span class="texto1"> P&aacute;gina: </span>
 
-    miniaturasSecCoringa
-    mibMiniaturasSecSIni
+    <miniaturas-secao-coringa>
+    <miniaturas-secao-selecionada>
     
-    <span class="texto1" style="padding-top:2px;">mibTxtSecaoNumSelecionadaS</span>
+    <span class="texto1" style="padding-top:2px;"><!-- texto-secao-numero-selecionada --></span>
     
-    mibMiniaturasSecSFim
+    </miniaturas-secao-selecionada>
     
-    mibMiniaturasSecNIni
+    <miniaturas-secao-nao-selecionada>
     
-    <a href="?p=mibTxtSecaoNumSelecionadaN/" class="link2">mibTxtSecaoNumSelecionadaN</a>
+    <a href="?p=<!-- texto-secao-numero-nao-selecionada -->/" class="link2"><!-- texto-secao-numero-nao-selecionada --></a>
 
-    mibMiniaturasSecNFim
+    </miniaturas-secao-nao-selecionada>
     
     <p><span class="texto3">Clique nas fotos para ampliar!</span></p>
     
-    mibMiniaturasSecFim
+    </miniaturas-secao>
     
     <table cellspacing="0" class="fotosTabela">
     
-    miniaturasCoringa		
-        mibMiniaturasFotoLinIniIni
+    <miniaturas-coringa>		
+        <miniaturas-foto-linha-inicio>
         
         <tr>
         
-        mibMiniaturasFotoLinIniFim
+        </miniaturas-foto-linha-inicio>
     
-        mibMiniaturasFotoIni
-        <td class="fotosPreP"><a href="?a=foto&n=mibMinFotoNum/" title="Clique para Ampliar" name="SiglamibMinFotoNum" id="SiglamibMinFotoNum"><img width="mibMinFotoLarguraPequena" height="mibMinFotoAlturaPequena" src="mibMinFotoDirP" name="fSiglamibMinFotoNum" id="fSiglamibMinFotoNum" border="0" alt="Clique para Ampliar"></a></td>
-        mibMiniaturasFotoFim
+        <miniaturas-foto>
+        <td class="fotosPreP"><a href="?a=foto&n=<!-- miniatura-foto-numero -->/" title="Clique para Ampliar" name="Sigla<!-- miniatura-foto-numero -->" id="Sigla<!-- miniatura-foto-numero -->"><img width="<!-- miniatura-foto-largura-pequena -->" height="<!-- miniatura-foto-altura-pequena -->" src="<!-- miniatura-foto-diretorio-pequena -->" name="fSigla<!-- miniatura-foto-numero -->" id="fSigla<!-- miniatura-foto-numero -->" border="0" alt="Clique para Ampliar"></a></td>
+        </miniaturas-foto>
         
-        mibMiniaturasFotoLinFimIni
+        <miniaturas-foto-linha-final>
         </tr>
-        mibMiniaturasFotoLinFimFim
+        </miniaturas-foto-linha-final>
         </table>
         
-mibMiniaturasFim
+</miniaturas>
 
-mibAmpliadasIni
+<ampliadas>
 <table width="100%" cellspacing="0" class="fotosTabela">	<tr>	<td width="33%" style="text-align:center;">		
     
-    mibAmpliadasAntIni
-    <a href="?a=foto&n=mibAmpFotoControleAntNum/" class="fa">Ver Anterior</a>
-    mibAmpliadasAntFim
+    <ampliadas-anterior>
+    <a href="?a=foto&n=<!-- ampliada-foto-controle-numero-anterior -->/" class="fa">Ver Anterior</a>
+    </ampliadas-anterior>
     
     </td>
     
-    <td width="34%" style="text-align:center;"><a href="?p=mibSecaoNum" class="ft">Ver Todas</a></td>
+    <td width="34%" style="text-align:center;"><a href="?p=<!-- secao-numero -->" class="ft">Ver Todas</a></td>
     
     <td width="33%" style="text-align:center;">
     
-    mibAmpliadasProIni
-    <a href="?a=foto&n=mibAmpFotoControleProNum/" class="fp">Ver Pr&oacute;xima</a>
-    mibAmpliadasProFim
+    <ampliadas-proxima>
+    <a href="?a=foto&n=<!-- ampliada-foto-controle-numero-proximo -->/" class="fp">Ver Pr&oacute;xima</a>
+    </ampliadas-proxima>
 
         </td>
     </tr>
     <tr>
-        <td colspan="3" style="text-align:center;">[Foto N&ordm; mibAmpFotoNum]<br></td>
+        <td colspan="3" style="text-align:center;">[Foto N&ordm; <!-- ampliada-foto-numero -->]<br></td>
     </tr>
     <tr>
-        <td colspan="3" class="fotosPreG" style="text-align:center;"><input type="text" disabled="disabled" style="border:none; margin:auto; width:mibAmpFotoLagpx; height:mibAmpFotoAlgpx; background:url(mibAmpFotoDirG) no-repeat center;" title="mibAmpFotoTitulo"></td>
+        <td colspan="3" class="fotosPreG" style="text-align:center;"><input type="text" disabled="disabled" style="border:none; margin:auto; width:<!-- ampliada-foto-largura-grande -->px; height:<!-- ampliada-foto-altura-grande -->px; background:url(<!-- ampliada-foto-diretorio-grande -->) no-repeat center;" title="<!-- ampliada-foto-titulo -->"></td>
     </tr>
 </table>
 
-mibAmpliadasFim
+</ampliadas>
