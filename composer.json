@@ -1,0 +1,29 @@
+{
+    "name": "pqt/sade/php/galeriadefoto",
+    "description": "Galeria de Fotos em PHP.",
+    "keywords": [
+        "php",
+        "galeria",
+        "foto",
+        "sade",
+        "pqt",
+        "web"
+    ],
+    "homepage": "http://www.pqt.com.br/",
+    "authors": [
+        {
+            "name": "José Felipe",
+            "email": "josefelipe@ilhadepaqueta.net"
+        },
+
+        {
+            "name": "djmibpqt",
+            "email": "djmibpqt@djmib.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/djmibpqt/sade-php-galeria-foto/issues"
+    },
+    "license": "MIT"
+
+}
