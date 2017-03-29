@@ -1,29 +1,13 @@
 {
-    "name": "djmibpqt/sadephpgaleriadefoto",
-    "description": "Galeria de Fotos em PHP.",
-    "keywords": [
-        "php",
-        "galeria",
-        "foto",
-        "sade",
-        "pqt",
-        "web"
-    ],
-    "homepage": "http://www.pqt.com.br/",
+    "name": "djmib/sadephpgaleriadefoto",
+    "description": "Galeria de foto feita em php e gera automaticamente miniaturas e fotos ampliadas",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
-            "name": "José Felipe",
-            "email": "josefelipe@ilhadepaqueta.net"
-        },
-
-        {
-            "name": "djmibpqt",
+            "name": "José Felipe - Dj Mib",
             "email": "djmibpqt@djmib.net"
         }
     ],
-    "support": {
-        "issues": "https://github.com/djmibpqt/sade-php-galeria-foto/issues"
-    },
-    "license": "MIT"
-
+    "require": {}
 }
